@@ -12,7 +12,35 @@
     <title>Great Number Game</title>
     <style>
         .container {
-            margin-top: 100px;
+            margin-top: 60px;
+            font-size: 36px;
+            width: 500px;
+        }
+        .high {
+            background-color: red;
+            min-height: 400px;
+            margin-bottom: 50px;
+            color: white;
+
+        }
+        h2 {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 150px;
+            font-weight: bold;
+        }
+        div.gotit form {
+            color: black;
+            padding-bottom: 10px;
+        }
+        .gotit {
+            background-color: green;
+            min-height: 400px;
+            margin-bottom: 50px;
+            color: white;
+        }
+        div.row form {
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -23,12 +51,24 @@
         </div>
         <div class="row h4">I am thinking of a number between 1 and 100</div>
         <div class="row h4">Take a guess</div>
+        {% if result == "Too high"%}
+            <div class="high"><h2>Too high!</h2></div>
+        {%elif result == "Too low"%}
+            <div class="high"><h2>Too low!</h2></div>
+        {% elif result == "You got it" %}
+            <div class="gotit"><h2>{{ session['num']}} was the number!</h2>
+            <form action="/" method="post"><button>Play Again!</button></form>
+            </div>
+        {%else%}
+
+        {%endif%}
         <div class="row">
-            <form action="/guess" method="GET">
+            <form action="/guess" method="post">
                 <input type="text" name="guess" />
                 <button>Submit</button>
             </form>
         </div>
+        
     </div>
 </body>
 </html>
